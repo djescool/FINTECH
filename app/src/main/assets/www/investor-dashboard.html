@@ -1,0 +1,422 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SME Grow - Investor Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#fcf8fb",
+                      "on-secondary-container": "#00725b",
+                      "primary-container": "#1a1d3b",
+                      "on-primary-fixed": "#161937",
+                      "secondary": "#006b55",
+                      "on-background": "#1c1b1e",
+                      "surface-dim": "#dcd9dc",
+                      "surface-tint": "#595c7e",
+                      "surface-container-high": "#ebe7ea",
+                      "on-primary-container": "#8285a9",
+                      "surface-container-low": "#f6f2f6",
+                      "surface": "#fcf8fb",
+                      "primary": "#030422",
+                      "on-surface": "#1c1b1e",
+                      "secondary-fixed": "#6dfad2",
+                      "on-surface-variant": "#46464d",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#c2c4eb",
+                      "on-secondary-fixed": "#002018",
+                      "primary-fixed-dim": "#c2c4eb",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#005140",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#ffb961",
+                      "inverse-surface": "#313033",
+                      "tertiary-fixed": "#ffddb9",
+                      "surface-bright": "#fcf8fb",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#f0edf0",
+                      "outline-variant": "#c7c5ce",
+                      "inverse-on-surface": "#f3f0f3",
+                      "outline": "#77767e",
+                      "on-primary-fixed-variant": "#414465",
+                      "secondary-fixed-dim": "#4bddb7",
+                      "surface-container-highest": "#e5e1e5",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#2b1700",
+                      "secondary-container": "#6dfad2",
+                      "primary-fixed": "#e0e0ff",
+                      "error": "#ba1a1a",
+                      "tertiary": "#0f0600",
+                      "on-tertiary-fixed-variant": "#663e00",
+                      "on-tertiary-container": "#be7800",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#301b00",
+                      "surface-variant": "#e5e1e5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-xs": "4px",
+                      "container-margin": "20px",
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "section-gap": "32px",
+                      "stack-sm": "8px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+        }
+
+        .line-chart-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s ease-out forwards;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Hide scrollbar for horizontal scroll areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style>body { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }</style></head>
+<body class="bg-[#F5F6FA] text-on-surface font-body-sm pb-24 min-h-screen"><button onclick="toggleDarkMode()" style="position:fixed;top:10px;left:10px;z-index:9999;background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:20px;padding:5px 10px;font-size:12px;">🌓 Mode</button>
+<!-- TopAppBar from JSON -->
+<header class="bg-background w-full top-0 sticky flex justify-between items-center px-container-margin py-stack-md z-40 transition-shadow duration-300" id="top-app-bar">
+<div class="flex items-center gap-stack-sm cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low p-2 rounded-lg">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy8tN0uAXfeU_4sPiDs1DAmoWDzIZk7Xs06hCT9o816WcI4h2Bnrclc_fpZYo7XnW7pPX8rb-jzEfQjtj91Qoxv0-Mnd8yzEZCGmpg7SbuiY8l4owdibAMO5ET-cXYs3Hiwt6yUFudgWeuXs9HQlvHO-FuN1JAbldwVgoIt-XddmtA6iBVxtHtzmsNnbAALqu7rIPsyC4ZPYYEO2La3IXUEvN7g0CVv73sQH3l0xgA93e-zCUYSdcS8FYOV3YZ1eUk-J3PzizlfxU">
+</div>
+<span class="font-headline-md text-headline-md text-primary">SME Grow</span>
+</div>
+<button class="font-label-caps text-label-caps text-primary border border-primary px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors active:scale-95">
+            FIAT/CRYPTO
+        </button>
+</header>
+<main class="px-container-margin py-stack-md flex flex-col gap-section-gap">
+<!-- Portfolio Card (Bento Grid Style) -->
+<section class="bg-white rounded-[12px] p-stack-lg ambient-shadow relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-full -mr-10 -mt-10"></div>
+<div class="flex flex-col gap-stack-md relative z-10">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Portfolio Value</h2>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-1">$124,500.00</div>
+</div>
+<div class="bg-secondary/10 px-2 py-1 rounded flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-data-mono text-data-mono font-bold">+8.4%</span>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Waiting Funds: </span>
+<span class="font-data-mono text-data-mono text-tertiary-fixed-dim">$4,200.00</span>
+</div>
+<!-- Minimalist Line Chart -->
+<div class="h-24 w-full mt-4 relative">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewBox="0 0 400 100">
+<!-- Chart Line -->
+<path class="line-chart-path" d="M0,80 Q50,70 100,50 T200,40 T300,20 T400,10" fill="none" stroke="#006b55" stroke-width="2"></path>
+<!-- Subtle gradient under line (optional, kept minimal) -->
+<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#006b55" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#006b55" stop-opacity="0"></stop>
+</linearGradient>
+<path d="M0,80 Q50,70 100,50 T200,40 T300,20 T400,10 L400,100 L0,100 Z" fill="url(#chartGradient)"></path>
+<!-- Grid lines (horizontal) -->
+<line stroke="#E1E4E8" stroke-dasharray="4,4" stroke-width="0.5" x1="0" x2="400" y1="25" y2="25"></line>
+<line stroke="#E1E4E8" stroke-dasharray="4,4" stroke-width="0.5" x1="0" x2="400" y1="50" y2="50"></line>
+<line stroke="#E1E4E8" stroke-dasharray="4,4" stroke-width="0.5" x1="0" x2="400" y1="75" y2="75"></line>
+</svg>
+</div>
+</div>
+</section>
+<!-- Active Investments List -->
+<section class="flex flex-col gap-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary">Active Investments</h3>
+<div class="flex flex-col gap-stack-sm">
+<!-- Investment Card 1: On Track -->
+<div class="bg-white rounded-[12px] p-stack-md ambient-shadow border border-transparent hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">solar_power</span>
+</div>
+<div>
+<h4 class="font-body-sm text-body-sm font-semibold text-primary">EcoTech Solar Farm</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Green Energy</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-primary">$15,000</div>
+<span class="font-label-caps text-label-caps text-secondary flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> On Track
+                            </span>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Repaid: 45%</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Est. Yield: 9.2%</span>
+</div>
+</div>
+<!-- Investment Card 2: Delay -->
+<div class="bg-white rounded-[12px] p-stack-md ambient-shadow border border-transparent hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div>
+<h4 class="font-body-sm text-body-sm font-semibold text-primary">Apex Manufacturing</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Industrial</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-data-mono text-primary">$8,500</div>
+<span class="font-label-caps text-label-caps text-error flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Delayed
+                            </span>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-error h-1.5 rounded-full" style="width: 15%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Repaid: 15%</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Est. Yield: 11.5%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recommended Projects (Horizontal Scroll) -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md text-headline-md text-primary">Recommended for You</h3>
+<a class="font-label-caps text-label-caps text-primary underline" href="#">View All</a>
+</div>
+<div class="flex gap-gutter overflow-x-auto no-scrollbar pb-4 -mx-container-margin px-container-margin snap-x">
+<!-- Recommended Card 1 -->
+<div class="min-w-[240px] bg-white rounded-[12px] p-stack-md ambient-shadow snap-start shrink-0 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="bg-surface-container w-12 h-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">health_and_safety</span>
+</div>
+<span class="font-label-caps text-label-caps bg-surface-container px-2 py-1 rounded text-primary font-bold">AA</span>
+</div>
+<div>
+<h4 class="font-body-sm text-body-sm font-semibold text-primary line-clamp-1">MediTech Solutions Expansion</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Healthcare IT</p>
+</div>
+<div class="flex justify-between items-end mt-2 pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">Target Yield</span>
+<span class="font-data-mono text-data-mono text-secondary font-bold">10.5%</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Recommended Card 2 (Premium Locked) -->
+<div class="min-w-[240px] bg-white rounded-[12px] p-stack-md ambient-shadow snap-start shrink-0 flex flex-col gap-3 relative overflow-hidden group">
+<!-- Blur Overlay -->
+<div class="absolute inset-0 z-20 backdrop-blur-[6px] bg-white/40 flex flex-col items-center justify-center p-4 text-center">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-3xl mb-2">lock</span>
+<span class="font-body-sm text-body-sm font-semibold text-primary mb-1">Premium Exclusive</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-3">AAA Rated Projects</span>
+<button class="bg-primary text-white font-label-caps text-label-caps px-4 py-2 rounded-lg w-full">Subscribe</button>
+</div>
+<!-- Blurred Content -->
+<div class="opacity-30 blur-[2px] pointer-events-none">
+<div class="flex justify-between items-start mb-3">
+<div class="bg-surface-container w-12 h-12 rounded-lg"></div>
+<span class="font-label-caps text-label-caps bg-surface-container px-2 py-1 rounded font-bold">AAA</span>
+</div>
+<div class="h-4 bg-surface-container rounded w-3/4 mb-2"></div>
+<div class="h-3 bg-surface-container rounded w-1/2 mb-4"></div>
+<div class="flex justify-between items-end mt-2 pt-2 border-t border-surface-container">
+<div class="h-8 bg-surface-container rounded w-16"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+</div>
+</div>
+</div>
+<!-- Recommended Card 3 -->
+<div class="min-w-[240px] bg-white rounded-[12px] p-stack-md ambient-shadow snap-start shrink-0 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="bg-surface-container w-12 h-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<span class="font-label-caps text-label-caps bg-surface-container px-2 py-1 rounded text-primary font-bold">A</span>
+</div>
+<div>
+<h4 class="font-body-sm text-body-sm font-semibold text-primary line-clamp-1">Global Logistics Hub</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Supply Chain</p>
+</div>
+<div class="flex justify-between items-end mt-2 pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">Target Yield</span>
+<span class="font-data-mono text-data-mono text-secondary font-bold">12.0%</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON (Dashboard Active) -->
+<nav class="bg-surface fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 rounded-t-xl shadow-sm md:hidden">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-stack-sm active:scale-90 transition-all duration-200 w-[72px]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps text-label-caps mt-1">Dashboard</span>
+</a>
+<!-- Explore (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-sm hover:text-primary active:scale-90 transition-all duration-200 w-[72px]" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-label-caps mt-1">Explore</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-sm hover:text-primary active:scale-90 transition-all duration-200 w-[72px]" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Optional: Add simple scroll effect to TopAppBar for a polished feel
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('top-app-bar');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+<script src="script.js"></script></body></html>
