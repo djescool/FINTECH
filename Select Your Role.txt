@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SME Grow - Role Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#fcf8fb",
+                        "on-secondary-container": "#00725b",
+                        "primary-container": "#1a1d3b",
+                        "on-primary-fixed": "#161937",
+                        "secondary": "#006b55",
+                        "on-background": "#1c1b1e",
+                        "surface-dim": "#dcd9dc",
+                        "surface-tint": "#595c7e",
+                        "surface-container-high": "#ebe7ea",
+                        "on-primary-container": "#8285a9",
+                        "surface-container-low": "#f6f2f6",
+                        "surface": "#fcf8fb",
+                        "primary": "#030422",
+                        "on-surface": "#1c1b1e",
+                        "secondary-fixed": "#6dfad2",
+                        "on-surface-variant": "#46464d",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c2c4eb",
+                        "on-secondary-fixed": "#002018",
+                        "primary-fixed-dim": "#c2c4eb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005140",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb961",
+                        "inverse-surface": "#313033",
+                        "tertiary-fixed": "#ffddb9",
+                        "surface-bright": "#fcf8fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0edf0",
+                        "outline-variant": "#c7c5ce",
+                        "inverse-on-surface": "#f3f0f3",
+                        "outline": "#77767e",
+                        "on-primary-fixed-variant": "#414465",
+                        "secondary-fixed-dim": "#4bddb7",
+                        "surface-container-highest": "#e5e1e5",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#2b1700",
+                        "secondary-container": "#6dfad2",
+                        "primary-fixed": "#e0e0ff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#0f0600",
+                        "on-tertiary-fixed-variant": "#663e00",
+                        "on-tertiary-container": "#be7800",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#301b00",
+                        "surface-variant": "#e5e1e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-xs": "4px",
+                        "container-margin": "20px",
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "section-gap": "32px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-caps": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .role-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .role-card.selected {
+            flex-grow: 2;
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        .role-card.dimmed {
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+        .continue-btn {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .role-card.selected .continue-btn {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition-delay: 0.2s;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-sm min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background w-full top-0 sticky flex justify-between items-center px-container-margin py-stack-md z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden" data-alt="A minimalist professional avatar portrait of a user. The lighting is soft and high-key, suitable for a premium financial platform. The subject is well-lit against a clean white background.">
+<!-- Avatar placeholder -->
+</div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">SME Grow</h1>
+</div>
+<button class="font-label-caps text-label-caps text-primary bg-surface-container-lowest border border-outline-variant px-4 py-2 rounded-lg shadow-sm hover:bg-surface-container-low transition-colors">
+            FIAT/CRYPTO
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-container-margin py-section-gap flex flex-col md:flex-row gap-6 items-stretch relative">
+<!-- Header for context -->
+<div class="md:hidden text-center mb-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Select Your Path</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose how you want to participate in SME Grow.</p>
+</div>
+<div class="hidden md:block absolute top-0 left-0 w-full text-center mt-[-20px] pointer-events-none z-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Select Your Path</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose how you want to participate in SME Grow.</p>
+</div>
+<!-- Left Card: Busco Financiamiento -->
+<div class="role-card flex-1 bg-surface-container-lowest rounded-[24px] border border-outline-variant shadow-[0_8px_24px_rgba(0,0,0,0.04)] cursor-pointer flex flex-col justify-between overflow-hidden relative" onclick="selectRole(this, 'sme')">
+<div class="absolute inset-0 bg-primary-container opacity-5 mix-blend-multiply"></div>
+<div class="p-8 flex flex-col items-center justify-center flex-grow relative z-10 text-center mt-12 md:mt-0">
+<div class="w-24 h-24 rounded-full bg-primary-container/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[48px] text-primary-container" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Busco Financiamiento</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs">I am an SME or Entrepreneur looking to raise capital for my next growth phase.</p>
+</div>
+<div class="p-6 relative z-10 continue-btn">
+<button class="w-full bg-primary-container text-on-primary font-body-sm font-semibold py-4 rounded-xl shadow-md hover:opacity-90 transition-opacity">
+                    Continuar como PYME
+                </button>
+</div>
+</div>
+<!-- Right Card: Quiero Invertir -->
+<div class="role-card flex-1 bg-surface-container-lowest rounded-[24px] border border-outline-variant shadow-[0_8px_24px_rgba(0,0,0,0.04)] cursor-pointer flex flex-col justify-between overflow-hidden relative" onclick="selectRole(this, 'investor')">
+<div class="absolute inset-0 bg-secondary opacity-5 mix-blend-multiply"></div>
+<div class="p-8 flex flex-col items-center justify-center flex-grow relative z-10 text-center mt-12 md:mt-0">
+<div class="w-24 h-24 rounded-full bg-secondary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[48px] text-secondary" style="font-variation-settings: 'FILL' 1;">show_chart</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Quiero Invertir</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs">I am an investor seeking vetted opportunities in high-potential SMEs.</p>
+</div>
+<div class="p-6 relative z-10 continue-btn">
+<button class="w-full bg-secondary text-on-primary font-body-sm font-semibold py-4 rounded-xl shadow-md hover:opacity-90 transition-opacity">
+                    Continuar como Inversor
+                </button>
+</div>
+</div>
+</main>
+<script>
+        function selectRole(element, role) {
+            const cards = document.querySelectorAll('.role-card');
+            
+            // If clicking already selected card, deselect
+            if (element.classList.contains('selected')) {
+                cards.forEach(card => {
+                    card.classList.remove('selected');
+                    card.classList.remove('dimmed');
+                });
+                return;
+            }
+
+            // Select clicked, dim others
+            cards.forEach(card => {
+                if (card === element) {
+                    card.classList.add('selected');
+                    card.classList.remove('dimmed');
+                } else {
+                    card.classList.remove('selected');
+                    card.classList.add('dimmed');
+                }
+            });
+        }
+    </script>
+</body></html>

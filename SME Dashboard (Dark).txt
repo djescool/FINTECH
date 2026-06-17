@@ -1,0 +1,324 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SME Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b0e14",
+                      "on-background": "#e2e2e5",
+                      "surface": "#10131a",
+                      "surface-dim": "#10131a",
+                      "surface-bright": "#363940",
+                      "surface-container-lowest": "#0b0e14",
+                      "surface-container-low": "#191c22",
+                      "surface-container": "#202329",
+                      "surface-container-high": "#2b2e35",
+                      "surface-container-highest": "#363940",
+                      "on-surface": "#e2e2e5",
+                      "on-surface-variant": "#c4c6d0",
+                      "primary": "#00b894",
+                      "on-primary": "#00382b",
+                      "primary-container": "#005240",
+                      "on-primary-container": "#59d6b9",
+                      "secondary": "#00b894",
+                      "on-secondary": "#00382b",
+                      "secondary-container": "#005240",
+                      "on-secondary-container": "#59d6b9",
+                      "tertiary-fixed-dim": "#ffb961",
+                      "outline": "#8e9099",
+                      "outline-variant": "#44474e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-xs": "4px",
+                      "container-margin": "20px",
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "section-gap": "32px",
+                      "stack-sm": "8px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 28, 34, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.8s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .hexagon {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-sm text-body-sm antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background flat no shadows z-40">
+<div class="flex justify-between items-center px-container-margin py-stack-md w-full border-b border-outline-variant/30">
+<!-- Leading: Avatar & Hex Shield -->
+<div class="flex items-center gap-stack-sm cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low p-1 rounded-full">
+<div class="relative">
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvPrukqwJK0RvBu52TYE8gtX3G95odmL-y2cy5lnoJFL_RQlcES5doUBf0FOuP3n49GxpmnGuCwbmal7nfCkoWn1V_dihpc8REsDMYlFMLBqrKHadLN5O_gpD8GdiToKoEe8D7f4JbDDRw-4BkJQCYfj1CTHYa9HuNvVvKHBA5eXNurUyO87CufVAsAuKe16OwJbql3X0Wxe8xaYvEJf6Wy5BudDCQkHa3KPnb_WRxQ12aSRS6CaCEE7PacfpNctz-waiEHTE7FIQ">
+<!-- Level 4 hexagonal shield -->
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary hexagon flex items-center justify-center text-on-secondary text-[10px] font-bold border border-background">
+                        4
+                    </div>
+</div>
+<img alt="SME Grow Logo" class="h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWo36TZ9-BNpo_CFvUvlWUohox-xYQEpmrn-jdUDe1dbfA-kfzXbGKgtBvMfu4bLv_78hadihzitDKUQK-ZEbmSuh95iHJRFIYUUHfSQdlZUunvJxhidgMpGWs0EXQjxTDXKVyY4iLkOwaKc4zE-SlujIDjKMNSAGwfdZNPUz11dbryr2dDBQmNKM2gYAgC6qSUgFGMSyJRu3v5fMRA63VL0PGXABRQP3F9gx7tL1oAhiFfvrB8cdtqD9P6p9ZXwm1FGFy20KPcY">
+</div>
+<!-- Trailing: Action -->
+<button class="font-label-caps text-label-caps text-primary border border-outline-variant px-3 py-1.5 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+                FIAT/CRYPTO
+            </button>
+</div>
+</header>
+<main class="px-container-margin pt-stack-md flex flex-col gap-section-gap">
+<!-- Main Project Card -->
+<section>
+<div class="glass-panel rounded-xl p-stack-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">EcoTech Expansion</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Series A Funding Round</p>
+<div class="flex flex-col items-center justify-center relative my-8">
+<!-- Circular Progress -->
+<svg class="w-48 h-48" viewBox="0 0 120 120">
+<circle class="text-surface-container-highest stroke-current" cx="60" cy="60" fill="transparent" r="54" stroke-width="6"></circle>
+<circle class="progress-ring__circle text-secondary stroke-current" cx="60" cy="60" fill="transparent" r="54" stroke-dasharray="339.292" stroke-dashoffset="108.57" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">68%</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-1 tracking-widest">FUNDED</span>
+</div>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">RAISED</p>
+<p class="font-data-mono text-data-mono text-primary text-lg">$34,000</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">GOAL</p>
+<p class="font-data-mono text-data-mono text-on-surface-variant">$50,000</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Investors Section -->
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md">Investor Demographics</h3>
+<div class="glass-panel rounded-xl p-stack-md flex items-center gap-stack-lg">
+<div class="w-32 h-32 shrink-0 relative">
+<!-- Simplified Donut Chart via CSS Conic Gradient -->
+<div class="w-full h-full rounded-full" style="background: conic-gradient(#005240 0% 45%, #00b894 45% 75%, #ffb961 75% 90%, #363940 90% 100%);"></div>
+<div class="absolute inset-4 bg-surface rounded-full"></div>
+</div>
+<div class="flex-1 flex flex-col gap-stack-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Whale</span>
+</div>
+<span class="font-data-mono text-data-mono">45%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Corp</span>
+</div>
+<span class="font-data-mono text-data-mono">30%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="font-body-sm text-body-sm text-on-surface">Retail</span>
+</div>
+<span class="font-data-mono text-data-mono">15%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<span class="font-body-sm text-body-sm text-on-surface">FFF</span>
+</div>
+<span class="font-data-mono text-data-mono">10%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Level Section -->
+<section>
+<div class="bg-surface-container-low rounded-xl p-stack-md border border-outline-variant/50">
+<div class="flex justify-between items-center mb-stack-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<h3 class="font-headline-md text-headline-md text-primary">Level 4 Innovator</h3>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">300 XP to Lvl 5</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden mt-stack-md">
+<div class="h-full bg-primary rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+</section>
+<!-- Education/Explore -->
+<section class="flex flex-col gap-stack-lg">
+<div>
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary">Financial Education</h3>
+<button class="font-label-caps text-label-caps text-secondary hover:underline">VIEW ALL</button>
+</div>
+<div class="flex overflow-x-auto gap-stack-md hide-scrollbar pb-2 -mx-container-margin px-container-margin">
+<!-- Card 1 -->
+<div class="w-64 shrink-0 glass-panel rounded-xl overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform">
+<div class="h-32 bg-surface-container-highest relative">
+<img alt="Chart" class="w-full h-full object-cover opacity-80" data-alt="A clean, minimalist composition showing subtle line charts and financial data softly illuminated on a modern digital tablet screen. The color palette is composed of cool mist grey and deep navy, conveying a professional, trustworthy, and high-end aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL063AfI4zz8NPYqhJ8toeFQKiclA09Jy6QbdeTNV2DPcB-oxzS7tpbj6vsmDLnmYUvn9vlqT6UndcSDQZs_4-mWcxjuUPW6chwW7lKjurR45_zLW3Hab90fcg6VuHA0TEPpBFQRqqGWR9O49ycL6CxCfGRqEMTRlDHS7OpyfiYJfodPwLPa7_IJMNQR_jqDbNoUXWhKXd4-4PNFo7asoMNJMhF5gnb5yinDHf-st4adMFX_0BfH4Tn_6iT2SpvJqOII_n-cvGrlI">
+</div>
+<div class="p-stack-sm">
+<p class="font-label-caps text-label-caps text-secondary mb-1">MODULE 1</p>
+<h4 class="font-body-lg text-body-lg text-primary font-semibold">Understanding Cap Tables</h4>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-64 shrink-0 glass-panel rounded-xl overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform">
+<div class="h-32 bg-surface-container-highest relative">
+<img alt="Architecture" class="w-full h-full object-cover opacity-80" data-alt="Abstract macro photography of modern architecture with precise geometric lines and subtle glassmorphic reflections. The lighting is calm and bright, utilizing crisp whites and gentle ambient shadows to evoke transparency and forward-thinking innovation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTPldGdQu-wAawvL8oMNTbLBWnCoRz1t368ekNHkeuz3VCAEjJVR2Ul15SaeKr3ga2xU6VBsfUBV0auiP9Rt-OSzV-7NAHYwcFPPHlOuMQrB-Jplx5ykqv6HSNRmMI2M1KjDjnox-hPT9DKd5P-rxeyHs0sdHeXJg6XCZbrvtoa8lqlqgli4FayE2Z8fUA4GHHXJLQNceysSLkBLOR9oxNwC7rR1WXaOYQAfPwUankRGHOHWFhOjC4SinfFy8EoOEIXJeDLJ9sqTw">
+</div>
+<div class="p-stack-sm">
+<p class="font-label-caps text-label-caps text-secondary mb-1">MODULE 2</p>
+<h4 class="font-body-lg text-body-lg text-primary font-semibold">Equity Structuring Basics</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface rounded-t-xl border-t border-outline-variant/30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.3)] md:hidden">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-stack-sm active:scale-90 transition-all duration-200 w-16" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps text-[10px] mt-1 text-center w-full truncate">Dashboard</span>
+</a>
+<!-- Explore -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-sm hover:text-primary active:scale-90 transition-all duration-200 w-16" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-[10px] mt-1 text-center w-full truncate">Explore</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-stack-sm hover:text-primary active:scale-90 transition-all duration-200 w-16" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-[10px] mt-1 text-center w-full truncate">Profile</span>
+</a>
+</nav>
+</body></html>
