@@ -43,3 +43,19 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-splashscreen:1.0.1")
 }
+
+android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("../release.keystore")
+            storePassword = "password123"
+            keyAlias = "android"
+            keyPassword = "password123"
+        }
+    }
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+}
